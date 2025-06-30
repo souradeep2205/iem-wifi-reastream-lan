@@ -1,5 +1,7 @@
 [![](https://jitpack.io/v/niusounds/libReaStream.svg)](https://jitpack.io/#niusounds/libReaStream)
 
+The **flowsample** example app is modified to support low-latency connectivity.
+
 # libReaStream
 
 Android audio streaming library which can interact with [ReaStream](http://www.reaper.fm/reaplugs/).
