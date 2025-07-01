@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTitle("Jammjot IEM+ v0.2")
+        setTitle("WiFi IEM+ v0.2")
         ActivityMainBinding.inflate(layoutInflater).apply {
             setContentView(root)
 
