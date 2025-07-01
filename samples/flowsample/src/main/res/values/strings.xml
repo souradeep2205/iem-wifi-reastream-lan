@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">Jammjot IEM</string>
+    <string name="app_name">WiFi IEM</string>
     <string name="message">1. Connect to Wi-Fi\n2. Set Battery Saver Unrestricted\n3. Turn on Airplane mode\n4. Set IP:%s\n5. Set desired volume and enjoy :)\n</string>
 </resources>
