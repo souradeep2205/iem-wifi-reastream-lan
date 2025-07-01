@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             //text.text="${text.text}\nSetting Minimum buffer size to $minbuf samples\n"
             val wifiManager = getSystemService(Context.WIFI_SERVICE) as WifiManager
             val wifiLockType = WifiManager.WIFI_MODE_FULL_HIGH_PERF
-            wifiLock = wifiManager.createWifiLock(wifiLockType, "jammjotiemlock")
+            wifiLock = wifiManager.createWifiLock(wifiLockType, "wifiiemlock")
             wifiLock.acquire() // Acquire the wifi lock
             // Display a message indicating the Wi-Fi lock status
             if (wifiLock.isHeld) {
