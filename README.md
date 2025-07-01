@@ -1,6 +1,31 @@
 [![](https://jitpack.io/v/niusounds/libReaStream.svg)](https://jitpack.io/#niusounds/libReaStream)
 
 The **flowsample** example app is modified to support low-latency connectivity.
+## library modifications
+Inside defaultAudioTrackFactory, the following audiotrack reciever is used
+```java
+return AudioTrack.Builder()
+            .setPerformanceMode(AudioTrack.PERFORMANCE_MODE_LOW_LATENCY)
+            //.setOffloadedPlayback(true)
+            .setAudioAttributes(AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_GAME).build())
+            .setBufferSizeInBytes(bufferSize)
+            .setTransferMode(AudioTrack.MODE_STREAM)
+            .setAudioFormat(
+                AudioFormat.Builder()
+                    .setChannelMask(channelMask)
+                    .setSampleRate(sampleRate)
+                    .setEncoding(AudioFormat.ENCODING_PCM_FLOAT)
+                    .build()
+            )
+            .build()
+```
+Sample size is set to default 128 or minimum supported by device.
+Audio is streamed in mono.
+Also
+
+ - Modified buffer size of Ktor UDP reciever.
+ - Wifi-Lock is used alongwith Wake-Lock
+ - UDP Reciever will be running on a prioritized thread.
 
 # libReaStream
 
