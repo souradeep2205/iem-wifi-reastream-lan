@@ -19,10 +19,11 @@ return AudioTrack.Builder()
             )
             .build()
 ```
-Sample size is set to default 128 or minimum supported by device.
-Audio is streamed in mono.
+
 Also
 
+ - Sample size is set to default 128 or minimum supported by device.
+ - Audio is streamed in mono to reduce bandwidth.
  - Modified buffer size of Ktor UDP reciever.
  - Wifi-Lock is used alongwith Wake-Lock
  - UDP Reciever will be running on a prioritized thread.
