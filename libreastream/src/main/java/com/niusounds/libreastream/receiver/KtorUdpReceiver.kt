@@ -24,7 +24,7 @@ class KtorUdpReceiver(
         val server = aSocket(ActorSelectorManager(ioContext))
             .udp()
             .bind(InetSocketAddress(port)){
-                receiveBufferSize=(4800+47)*2
+                receiveBufferSize=1247 * 8
             }
 
         return server.incoming.consumeAsFlow()

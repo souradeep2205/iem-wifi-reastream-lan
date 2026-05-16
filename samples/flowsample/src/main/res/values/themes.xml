@@ -2,9 +2,10 @@
     <!-- Base application theme. -->
     <style name="Theme.LibReaStream" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#0B14B3</item>
-        <item name="colorPrimaryDark">#0B14B3</item>
-        <item name="colorAccent">#0B14B3</item>
+        <item name="colorPrimary">#1031E9</item>
+        <item name="colorPrimaryDark">#1031E9</item>
+        <item name="colorAccent">#1031E9</item>
+        <item name="android:statusBarColor">#1031E9</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>

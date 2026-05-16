@@ -16,7 +16,6 @@ import com.niusounds.flowsample.databinding.ActivityMainBinding
 import com.niusounds.libreastream.receiver.play
 import com.niusounds.libreastream.receiver.receiveReaStream
 import kotlinx.coroutines.asCoroutineDispatcher
-import kotlinx.coroutines.asExecutor
 import java.net.Inet4Address
 import java.net.NetworkInterface
 import kotlinx.coroutines.launch
@@ -35,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         }.asCoroutineDispatcher()
         val executorUdp = Executors.newSingleThreadExecutor(){
             Thread(it).apply {
-                priority=Thread.MAX_PRIORITY
+                priority = Thread.MAX_PRIORITY-1
             }
         }.asCoroutineDispatcher()
     }
@@ -44,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTitle("WiFi IEM+ v0.2")
+        setTitle("Jammjot WiFi IEM+ v0.3")
         ActivityMainBinding.inflate(layoutInflater).apply {
             setContentView(root)
 
@@ -52,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             findMyIpAddress()?.let { myIp -> text.text = getString(R.string.message, myIp) }
             val am = getSystemService(Context.AUDIO_SERVICE) as AudioManager
             val minbuf=am.getProperty(AudioManager.PROPERTY_OUTPUT_FRAMES_PER_BUFFER).toInt()
-            //text.text="${text.text}\nSetting Minimum buffer size to $minbuf samples\n"
+            text.text="${text.text}\nSetting Minimum buffer size to $minbuf samples\n"
             val wifiManager = getSystemService(Context.WIFI_SERVICE) as WifiManager
             val wifiLockType = WifiManager.WIFI_MODE_FULL_HIGH_PERF
             wifiLock = wifiManager.createWifiLock(wifiLockType, "wifiiemlock")
@@ -83,14 +82,14 @@ class MainActivity : AppCompatActivity() {
                 text.text = "${text.text}\nFailed to acquire Wake lock."
             }
 
-            lifecycleScope.launch {
+            // Launch the collector on the audio executor directly
+            lifecycleScope.launch(executorAudio) {
                 val packets = receiveReaStream(executorUdp)
 
-                // Play received audio
-                launch(executorAudio) {
-                    packets.play(minbuf,this@MainActivity,sampleRate = 48000)
-                }
+                // Call the suspend function directly on this coroutine's context
+                packets.play(minbuf, this@MainActivity, sampleRate = 48000)
             }
+
             Toast.makeText(this@MainActivity, "Listening...", Toast.LENGTH_SHORT).show()
         }
     }
